@@ -1,92 +1,17 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MBTI診断（<%= @name %>）</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9fafb;
-      color: #333;
-      margin: 0;
-      padding: 20px;
-    }
-    header {
-      text-align: center;
-      padding: 1rem;
-      background: #4f46e5;
-      color: white;
-      border-radius: 12px;
-    }
-    h1 {
-      margin: 0;
-    }
-    section {
-      max-width: 700px;
-      margin: 2rem auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    h2 {
-      border-left: 4px solid #4f46e5;
-      padding-left: 8px;
-      margin-top: 2rem;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin: 1rem 0;
-      padding: 1rem;
-      background: #f3f4f6;
-      border-radius: 8px;
-    }
-    footer {
-      text-align: center;
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>MBTI診断（<%= @name %>）</h1>
-    <p>あなたの性格タイプを探ってみましょう（※動作はダミーです）</p>
-  </header>
+<a href="/ti" class="start-btn">診断を始める</a>
 
-  <section>
-    <h2>外向型 (E) / 内向型 (I)</h2>
-    <ul>
-      <li>人と一緒にいるとエネルギーが湧く（E）</li>
-      <li>一人で過ごすとリフレッシュできる（I）</li>
-    </ul>
-
-    <h2>直感型 (N) / 感覚型 (S)</h2>
-    <ul>
-      <li>未来の可能性やアイデアを重視する（N）</li>
-      <li>現実的で具体的な情報を重視する（S）</li>
-    </ul>
-
-    <h2>思考型 (T) / 感情型 (F)</h2>
-    <ul>
-      <li>合理性や正しさを基準に判断する（T）</li>
-      <li>人の気持ちや調和を重視して判断する（F）</li>
-    </ul>
-
-    <h2>判断型 (J) / 知覚型 (P)</h2>
-    <ul>
-      <li>計画的でスケジュールを守る（J）</li>
-      <li>柔軟でその場の流れに従う（P）</li>
-    </ul>
-  </section>
-
-  <footer>
-    <p>※このページはデモ用の静的HTMLです。診断機能はありません。</p>
-  </footer>
-</body>
-</html>
+<style>
+  .start-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background-color: #4f46e5;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .start-btn:hover {
+    background-color: #3730a3;
+  }
+</style>
