@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "ti", to: 'ti#index'
+  get "ti/question1", to: 'ti#question1'
   get 'welcomes', to: 'welcomes#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
