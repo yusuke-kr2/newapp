@@ -1,0 +1,19 @@
+<section id="question3">
+  <h2>質問3: あなたはどちらの生活スタイルが好きですか？</h2>
+  <form action="/ti/result" method="get">
+    <div>
+      <input type="radio" id="organized" name="q3" value="J" required>
+      <label for="organized">計画的でスケジュールを守る（判断型 J）</label>
+    </div>
+    <div>
+      <input type="radio" id="flexible" name="q3" value="P">
+      <label for="flexible">柔軟でその場の流れに従う（知覚型 P）</label>
+    </div>
+    <div>
+      <input type="hidden" id="l" name="q1" value="<%= @q %>">
+      <input type="hidden" id="p" name="q2" value="<%= @q2 %>">
+    </div>
+    <button type="submit">次の質問へ</button>
+  </form>
+</section>
+

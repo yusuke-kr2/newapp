@@ -7,7 +7,11 @@ class TiController < ApplicationController
 
   def question2
     # クエリパラメーターからq1を読み込む
-    @params = params[:q1]
+    @q = params[:q1]
+  end
+
+  def question3
+    @q2 = params[:q2]
   end
 
 
