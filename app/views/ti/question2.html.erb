@@ -1,6 +1,6 @@
 <section id="question2">
   <h2>質問2: あなたはどちらのタイプですか？</h2>
-  <form action="/ti/result" method="get">
+  <form action="/ti/question3" method="get">
     <div>
       <input type="radio" id="n" name="q2" value="N" required>
       <label for="n">未来の可能性やアイデアを重視する（直感型 N）</label>
@@ -10,7 +10,7 @@
       <label for="s">現実的で具体的な情報を重視する（感覚型 S）</label>
     </div>
     <div>
-      <input type="hidden" id="l" name="q1" value="<%= @params %>">
+      <input type="hidden" id="l" name="q1" value="<%= @q %>">
     </div>
     <button type="submit">次の質問へ</button>
   </form>

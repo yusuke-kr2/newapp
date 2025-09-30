@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "ti/question1", to: 'ti#question1'
   get "ti/question2", to: 'ti#question2'
+  get "ti/question3", to: "ti#question3"
   get 'welcomes', to: 'welcomes#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
