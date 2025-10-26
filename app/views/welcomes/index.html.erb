@@ -1,17 +1,31 @@
-<a href="/ti/question1" class="start-btn">診断を始める</a>
+<div class="center-wrapper">
+  <a href="/ti/question1" class="start-btn">診断を始める</a>
+</div>
 
 <style>
-  .start-btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    background-color: #4f46e5;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    text-align: center;
-  }
-  .start-btn:hover {
-    background-color: #3730a3;
-  }
+    .center-wrapper {
+        display: flex;
+        justify-content: center; /* 横中央 */
+        align-items: center;     /* 縦中央 */
+        height: 500px;           /* 親の高さを指定（必要に応じて調整） */
+        width: 100%;             /* 横いっぱいに */
+    }
+
+    .start-btn {
+        display: inline-block;
+        padding: 2rem 4rem;      /* 大きく */
+        font-size: 2rem;         /* 文字も大きく */
+        font-weight: bold;
+        background-color: #4f46e5;
+        color: white;
+        text-decoration: none;
+        border-radius: 12px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .start-btn:hover {
+        transform: scale(1.1) translateY(-3px);
+        background-color: #3730a3;
+    }
 </style>
