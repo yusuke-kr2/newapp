@@ -1,0 +1,240 @@
+<div class="wrap">
+  <div class="card" role="region" aria-label="MBTI result">
+    <div class="flourish">ババーン！</div>
+    <h1>あなたの結果は</h1>
+    <p class="lead">ドキドキの結果を確認しましょう！</p>
+
+    <div id="resultBox" aria-live="polite">
+      <% if @type.present? %>
+        <span id="result" class="result"><%= @type %></span>
+      <% else %>
+        <span id="result" class="result">結果未定</span>
+      <% end %>
+      <span class="sparkle" id="sparkle" title="Bam!">✨</span>
+    </div>
+
+    <div class="controls">
+      <button class="btn primary" id="playBtn" type="button">ババーン！を再生</button>
+      <button class="btn" id="copyBtn" type="button">結果をコピー</button>
+    </div>
+
+    <canvas id="confetti"></canvas>
+  </div>
+</div>
+
+<style>
+    /* 全体レイアウト */
+    .wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: radial-gradient(circle at center, #fff8e1, #ffe5ec);
+        overflow: hidden;
+        position: relative;
+        font-family: "Noto Sans JP", sans-serif;
+    }
+
+    /* カードエリア */
+    .card {
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        padding: 3rem 2rem;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        max-width: 500px;
+        width: 90%;
+        animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    /* 「ババーン！」タイトル */
+    .flourish {
+        font-size: 2.4rem;
+        color: #ff4081;
+        font-weight: bold;
+        letter-spacing: 3px;
+        animation: bounce 1s ease infinite alternate;
+    }
+
+    @keyframes bounce {
+        from { transform: translateY(0); }
+        to { transform: translateY(-8px); }
+    }
+
+    /* 見出し */
+    h1 {
+        font-size: 1.8rem;
+        margin-top: 1rem;
+        color: #333;
+    }
+
+    /* サブリード */
+    .lead {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    /* 結果表示 */
+    #resultBox {
+        position: relative;
+        margin: 1rem auto;
+    }
+
+    .result {
+        display: inline-block;
+        font-size: 2.6rem;
+        font-weight: bold;
+        color: #4cc9f0;
+        text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+        animation: popIn 0.6s ease-out;
+    }
+
+    @keyframes popIn {
+        from { opacity: 0; transform: scale(0.3) rotate(-10deg); }
+        to { opacity: 1; transform: scale(1) rotate(0); }
+    }
+
+    /* キラッ✨ */
+    .sparkle {
+        font-size: 1.8rem;
+        margin-left: 8px;
+        animation: sparkle 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes sparkle {
+        from { opacity: 0.4; transform: rotate(0deg) scale(0.9); }
+        to { opacity: 1; transform: rotate(20deg) scale(1.1); }
+    }
+
+    /* ボタン */
+    .controls {
+        margin-top: 2rem;
+    }
+
+    .btn {
+        background: #f0f0f0;
+        color: #333;
+        border: none;
+        border-radius: 9999px;
+        padding: 0.8rem 1.6rem;
+        margin: 0.4rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+        background: #e0e0e0;
+        transform: translateY(-2px);
+    }
+
+    .btn.primary {
+        background: linear-gradient(45deg, #ff6b6b, #f72585);
+        color: #fff;
+    }
+
+    .btn.primary:hover {
+        filter: brightness(1.1);
+    }
+
+    /* 紙吹雪キャンバス */
+    #confetti {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+</style>
+
+<script>
+    (() => {
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        let W = canvas.width = canvas.offsetWidth;
+        let H = canvas.height = canvas.offsetHeight;
+
+        window.addEventListener('resize', () => {
+            W = canvas.width = canvas.offsetWidth;
+            H = canvas.height = canvas.offsetHeight;
+        });
+
+        function rand(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        const colors = ['#ffd166', '#06d6a0', '#4cc9f0', '#ff6b6b', '#f72585', '#b5179e'];
+
+        function createConfetti(x, y) {
+            const count = 28;
+            const arr = [];
+            for (let i = 0; i < count; i++) {
+                arr.push({
+                    x: x + rand(-30, 30),
+                    y: y + rand(-10, 10),
+                    w: rand(6, 12),
+                    h: rand(8, 16),
+                    vx: rand(-6, 6),
+                    vy: rand(-6, -1),
+                    rot: rand(0, 360),
+                    vr: rand(-8, 8),
+                    color: colors[Math.floor(rand(0, colors.length))]
+                });
+            }
+            return arr;
+        }
+
+        let particles = [];
+        let animId = null;
+
+        function step() {
+            ctx.clearRect(0, 0, W, H);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.18;
+                p.rot += p.vr;
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rot * Math.PI / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                ctx.restore();
+                if (p.y > H + 50) particles.splice(i, 1);
+            }
+            if (particles.length) animId = requestAnimationFrame(step);
+            else cancelAnimationFrame(animId);
+        }
+
+        function playConfetti() {
+            const rect = canvas.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 3;
+            particles.push(...createConfetti(centerX, centerY));
+            if (!animId) step();
+        }
+
+        // 「ババーン！」ボタンで再生
+        document.getElementById('playBtn').addEventListener('click', playConfetti);
+
+        // 結果コピー機能
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            const text = document.getElementById('result').textContent.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                alert('結果をコピーしました！');
+            });
+        });
+    })();
+</script>

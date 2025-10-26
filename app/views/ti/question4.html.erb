@@ -1,0 +1,22 @@
+<section id="question4">
+  <h2>質問4: あなたはどちらの時間の使い方が好きですか？</h2>
+  <form action="/ti/result" method="get">
+    <div>
+      <input type="radio" id="organized" name="q4" value="J" required>
+      <label for="organized">予定を立てて計画的に過ごす（判断型 J）</label>
+    </div>
+    <div>
+      <input type="radio" id="flexible" name="q4" value="P">
+      <label for="flexible">その時の気分で柔軟に過ごす（知覚型 P）</label>
+    </div>
+    <div>
+      <input type="hidden" id="l" name="q1" value="<%= @q1 %>">
+      <input type="hidden" id="p" name="q2" value="<%= @q2 %>">
+      <input type="hidden" id="z" name="q3" value="<%= @q3 %>">
+    </div>
+    <button type="submit">結果</button>
+  </form>
+</section>
+
+
+
