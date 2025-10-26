@@ -1,0 +1,18 @@
+<section id="question3">
+  <h2>質問3: あなたはどちらの判断基準を重視しますか？</h2>
+  <form action="/ti/question4" method="get">
+    <div>
+      <input type="radio" id="t" name="q3" value="T" required>
+      <label for="t">論理的・客観的に判断する（思考型 T）</label>
+    </div>
+    <div>
+      <input type="radio" id="f" name="q3" value="F">
+      <label for="f">感情や人間関係を重視して判断する（感情型 F）</label>
+    </div>
+    <div>
+      <input type="hidden" id="l" name="q1" value="<%= @q1 %>">
+      <input type="hidden" id="p" name="q2" value="<%= @q2 %>">
+    </div>
+    <button type="submit">次の質問へ</button>
+  </form>
+</section>
